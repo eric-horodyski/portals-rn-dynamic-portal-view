@@ -7,7 +7,6 @@ import {
   useColorScheme,
 } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { DataProvider, ProductProvider } from './src/shared';
 import TabsContainer from './src/Tabs';
 import initializePortals from './src/initializePortals';
 
@@ -25,11 +24,7 @@ const App = () => {
     <SafeAreaView style={styles.safeArea}>
       <StatusBar barStyle={barStyle} backgroundColor="#ffffff" />
       <SafeAreaProvider>
-        <DataProvider>
-          <ProductProvider>
-            <TabsContainer />
-          </ProductProvider>
-        </DataProvider>
+        <TabsContainer />
       </SafeAreaProvider>
     </SafeAreaView>
   );

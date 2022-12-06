@@ -1,17 +1,10 @@
 import { Redirect, Route } from "react-router-dom";
 import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { User, Cart } from "@portals-ecommerce/shared";
 
-import AddressPage from "./address/AddressPage";
-import DebugPage from "./debug/DebugPage";
-import UserDetailPage from "./user/UserDetailPage";
-import PaymentPage from "./payment/PaymentPage";
-import CheckoutPage from "./checkout/CheckoutPage";
-import HelpPage from "./help/HelpPage";
-
-import { useEffect } from "react";
-import { useData } from "./shared/useData";
+import ShopPage from "./pages/ShopPage";
+import ProfilePage from "./pages/ProfilePage";
+import CartPage from "./pages/CartPage";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -36,19 +29,11 @@ setupIonicReact();
 
 export interface AppContext {
   startingRoute: string;
-  user?: User;
-  cart?: Cart;
 }
 
 const App: React.FC<{ context: AppContext }> = ({
-  context: { startingRoute, user, cart },
+  context: { startingRoute },
 }) => {
-  const { setStateData } = useData();
-
-  useEffect(() => {
-    setStateData({ user, cart });
-  }, [setStateData, user, cart]);
-
   return (
     <IonApp>
       <IonReactRouter>
@@ -57,16 +42,12 @@ const App: React.FC<{ context: AppContext }> = ({
             {startingRoute !== "/" ? (
               <Redirect to={startingRoute} />
             ) : (
-              <DebugPage />
+              <ShopPage />
             )}
           </Route>
-          <Route path="/address" exact component={AddressPage} />
-          <Route path="/address/:id" exact component={AddressPage} />
-          <Route path="/checkout" exact component={CheckoutPage} />
-          <Route path="/help" exact component={HelpPage} />
-          <Route path="/payment" exact component={PaymentPage} />
-          <Route path="/payment/:id" component={PaymentPage} />
-          <Route path="/user" exact component={UserDetailPage} />
+          <Route path="/shop" exact component={ShopPage} />
+          <Route path="/profile" exact component={ProfilePage} />
+          <Route path="/cart" exact component={CartPage} />
         </IonRouterOutlet>
       </IonReactRouter>
     </IonApp>
